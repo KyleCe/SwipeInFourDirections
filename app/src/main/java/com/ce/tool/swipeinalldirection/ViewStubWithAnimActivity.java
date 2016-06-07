@@ -201,6 +201,13 @@ public class ViewStubWithAnimActivity extends Activity {
                 });
                 anim.start();
                 ViewU.show(mFirstEAF.view, mSecondEAF.view);
+
+                // bring the X/Y back
+                if (mSecondEAF.propertyName.equals("translationX"))
+                    ObjectAnimator.ofFloat(mSecondEAF.view, "translationY",
+                            mSecondEAF.view.getY(),oldY).setDuration(1).start();
+                else ObjectAnimator.ofFloat(mSecondEAF.view, "translationX",
+                        mSecondEAF.view.getX(),oldX).setDuration(1).start();
             }
 
             @Override
@@ -211,6 +218,7 @@ public class ViewStubWithAnimActivity extends Activity {
                 // reverse the view position
                 ObjectAnimator.ofFloat(mFirstEAF.view, mFirstEAF.propertyName,
                         mFirstEAF.toValue, mFirstEAF.fromValue).setDuration(1).start();
+
             }
 
             @Override

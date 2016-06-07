@@ -10,7 +10,7 @@
         android:keepScreenOn="true"
         android:text="left"
         android:textColor="#33b5e5"
-        android:background="#aa1122"
+        android:background="#8a34f2"
         android:textSize="50sp"
         android:textStyle="bold"/>
 </FrameLayout>

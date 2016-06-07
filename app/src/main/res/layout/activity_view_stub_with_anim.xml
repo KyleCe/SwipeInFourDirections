@@ -9,22 +9,6 @@
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
 
-    <!--<include-->
-        <!--android:id="@+id/testInclude"-->
-        <!--layout="@layout/stub_fill_item"/>-->
-    <!--<include-->
-        <!--android:id="@+id/testInclude"-->
-        <!--layout="@layout/stub_fill_item_top"/>-->
-    <!--<include-->
-        <!--android:id="@+id/testInclude"-->
-        <!--layout="@layout/stub_fill_item_bottom"/>-->
-    <!--<include-->
-        <!--android:id="@+id/testInclude"-->
-        <!--layout="@layout/stub_fill_item_left"/>-->
-    <!--<include-->
-        <!--android:id="@+id/testInclude"-->
-        <!--layout="@layout/stub_fill_item_right"/>-->
-
     <ViewStub
         android:id="@+id/viewStub"
         android:layout_width="match_parent"
@@ -61,17 +45,6 @@
         android:inflatedId="@+id/item_right"
         android:layout="@layout/stub_fill_item_right"/>
 
-    <TextView
-        android:id="@+id/fullscreen_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:text="BG"
-        android:textColor="#11b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold"/>
-
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
     <FrameLayout
@@ -88,14 +61,6 @@
             android:background="@color/black_overlay"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
-
-            <!--<Button-->
-                <!--android:id="@+id/dummy_button"-->
-                <!--style="?metaButtonBarButtonStyle"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="@string/dummy_button"/>-->
 
         </LinearLayout>
     </FrameLayout>

@@ -10,7 +10,7 @@
         android:keepScreenOn="true"
         android:text="top"
         android:textColor="#33b5e5"
-        android:background="#001122"
+        android:background="#859966"
         android:textSize="50sp"
         android:textStyle="bold"/>
 </LinearLayout>
