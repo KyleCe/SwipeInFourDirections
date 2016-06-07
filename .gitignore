@@ -47,8 +47,11 @@ Temporary Items
 .apdisk
 .gradle/2.10/taskArtifacts/cache.properties
 
-#build directory
+#build directory-----for common used
 /build/**
 /.idea/**
 /.gradle/**
+*.iml
+.gitattributes
+local.properties
 
