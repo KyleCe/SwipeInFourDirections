@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -132,6 +133,8 @@ public class ViewStubWithAnimActivity extends Activity {
         });
 
         mGestureDetector = new GestureDetector(this, swipeWithAnimListener);
+
+        startActivity(new Intent(this,SwipeActivity.class));
     }
 
     private class EssentialAnimFactors {
