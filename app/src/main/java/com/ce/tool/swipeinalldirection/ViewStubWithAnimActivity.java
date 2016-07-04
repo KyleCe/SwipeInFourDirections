@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -14,6 +13,7 @@ import android.view.ViewStub;
 import com.ce.tool.swipeinalldirection.swipetochangeview.OnSwipeListener.Direction;
 import com.ce.tool.swipeinalldirection.swipetochangeview.ScreenModeHelper;
 import com.ce.tool.swipeinalldirection.swipetochangeview.SwipeWithAnimListener;
+import com.ce.tool.swipeinalldirection.util.DU;
 import com.ce.tool.swipeinalldirection.util.ViewU;
 
 
@@ -134,7 +134,7 @@ public class ViewStubWithAnimActivity extends Activity {
 
         mGestureDetector = new GestureDetector(this, swipeWithAnimListener);
 
-        startActivity(new Intent(this,SwipeActivity.class));
+//        startActivity(new Intent(this,SwipeActivity.class));
     }
 
     private class EssentialAnimFactors {
@@ -205,12 +205,7 @@ public class ViewStubWithAnimActivity extends Activity {
                 anim.start();
                 ViewU.show(mFirstEAF.view, mSecondEAF.view);
 
-                // bring the X/Y back
-                if (mSecondEAF.propertyName.equals("translationX"))
-                    ObjectAnimator.ofFloat(mSecondEAF.view, "translationY",
-                            mSecondEAF.view.getY(),oldY).setDuration(1).start();
-                else ObjectAnimator.ofFloat(mSecondEAF.view, "translationX",
-                        mSecondEAF.view.getX(),oldX).setDuration(1).start();
+                bringTheXyBack();
             }
 
             @Override
@@ -236,6 +231,14 @@ public class ViewStubWithAnimActivity extends Activity {
         });
 
         animator.start();
+    }
+
+    private void bringTheXyBack() {
+        if (mSecondEAF.propertyName.equals("translationX"))
+            ObjectAnimator.ofFloat(mSecondEAF.view, "translationY",
+                    mSecondEAF.view.getY(), oldY).setDuration(1).start();
+        else ObjectAnimator.ofFloat(mSecondEAF.view, "translationX",
+                mSecondEAF.view.getX(), oldX).setDuration(1).start();
     }
 
     private void cancelAnimation(View view) {
@@ -295,18 +298,17 @@ public class ViewStubWithAnimActivity extends Activity {
         return mGestureDetector.onTouchEvent(event);
     }
 
-    private static final int UNSET = 584;
-    private static final int SWIPE_X = 456;
-    private static final int SWIPE_Y = 416;
+    private final int UNSET = 584;
+    private final int SWIPE_X = 456;
+    private final int SWIPE_Y = 416;
+
+    volatile int mSwipeType = UNSET;// 0 for x; 1 for y
 
     private void strategyAnim(MotionEvent event, View view) {
         float startX = 0f;
         float startY = 0f;
 
-        int mSwipeType = UNSET;// 0 for x; 1 for y
-
         switch (event.getAction()) {
-
             case MotionEvent.ACTION_DOWN:
                 dX = view.getX() - event.getRawX();
                 dY = view.getY() - event.getRawY();
@@ -314,7 +316,6 @@ public class ViewStubWithAnimActivity extends Activity {
                 startX = event.getRawX();
                 startY = event.getRawY();
                 mSwipeType = UNSET;
-
                 break;
 
             case MotionEvent.ACTION_MOVE:
@@ -324,8 +325,8 @@ public class ViewStubWithAnimActivity extends Activity {
 
                     mSwipeType = Math.abs(alterX) >= Math.abs(alterY)
                             ? SWIPE_X : SWIPE_Y;
+                    DU.sd("move", mSwipeType == SWIPE_X ? "X" : "Y");
                 }
-
 
                 if (mSwipeType == SWIPE_X)
                     view.animate()
@@ -344,6 +345,7 @@ public class ViewStubWithAnimActivity extends Activity {
                         .y(oldY)
                         .setDuration(500)
                         .start();
+                mSwipeType = UNSET;
                 break;
         }
     }
