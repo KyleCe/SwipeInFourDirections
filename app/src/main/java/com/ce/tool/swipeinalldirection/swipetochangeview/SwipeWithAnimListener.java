@@ -24,7 +24,7 @@ public class SwipeWithAnimListener extends OnSwipeListener {
 
     @Override
     public boolean onSwipe(Direction direction) {
-        if(mOperator == null) return super.onSwipe(direction);
+        if (mOperator == null) return super.onSwipe(direction);
 
         switch (direction) {
             case up:
@@ -43,15 +43,22 @@ public class SwipeWithAnimListener extends OnSwipeListener {
                 DU.sd("r");
                 mOperator.right();
                 break;
+            case none:
+            default:
+                DU.sd("none");
+                break;
         }
 
         return super.onSwipe(direction);
     }
 
-    public interface DirectionOperator{
+    public interface DirectionOperator {
         void up();
+
         void down();
+
         void left();
+
         void right();
     }
 
