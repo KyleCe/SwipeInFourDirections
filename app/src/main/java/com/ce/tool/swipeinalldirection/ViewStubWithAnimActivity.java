@@ -113,6 +113,8 @@ public class ViewStubWithAnimActivity extends Activity {
         SwipeWithAnimListener swipeWithAnimListener = new SwipeWithAnimListener(new SwipeWithAnimListener.DirectionOperator() {
             @Override
             public void up() {
+                if(mShowingItem.equals(ShowingItem.bottom)) return;
+
                 animationDelegate(mShowingItem, Direction.up);
             }
 
@@ -123,11 +125,15 @@ public class ViewStubWithAnimActivity extends Activity {
 
             @Override
             public void left() {
+                if(mShowingItem.equals(ShowingItem.bottom)) return;
+
                 animationDelegate(mShowingItem, Direction.left);
             }
 
             @Override
             public void right() {
+                if(mShowingItem.equals(ShowingItem.bottom)) return;
+
                 animationDelegate(mShowingItem, Direction.right);
             }
         });
